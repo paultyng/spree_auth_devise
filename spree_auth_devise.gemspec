@@ -23,6 +23,9 @@ Gem::Specification.new do |s|
   s.add_dependency 'spree_core', spree_version
   s.add_dependency 'devise', '~> 3.2.3'
   s.add_dependency 'devise-encryptable', '0.1.2'
+  s.add_dependency 'omniauth', '~> 1.2.2'
+  s.add_dependency 'omniauth-facebook', '~> 2.0.1'
+  s.add_dependency 'omniauth-google-oauth2', '~> 0.2.6'
 
   s.add_dependency 'json'
   s.add_dependency 'multi_json'

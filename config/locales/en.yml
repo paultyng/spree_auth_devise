@@ -21,9 +21,10 @@ en:
         subject: Reset password instructions
       unlock_instructions:
         subject: Unlock Instructions
-    oauth_callbacks:
-      failure: 'Could not authorize you from %{kind} because %{reason}.'
-      success: 'Successfully authorized from %{kind} account.'
+    omniauth_callbacks:
+      failure: 'Could not authorize you because %{reason}.'
+      signed_in: 'You have signed in successfully.'
+      signed_up: 'You have signed up successfully.'
     unlocks:
       send_instructions: You will receive an email with instructions about how to unlock your account in a few minutes.
       unlocked: Your account was successfully unlocked. You are now signed in.

@@ -3,8 +3,10 @@ module Spree
     include Core::UserAddress
     include Core::UserPaymentSource
 
-    devise :database_authenticatable, :registerable, :recoverable,
-           :rememberable, :trackable, :validatable, :encryptable, :encryptor => 'authlogic_sha512'
+    devise :omniauthable, :database_authenticatable, :registerable, :recoverable,
+           :rememberable, :trackable, :validatable, :encryptable,
+           :encryptor => 'authlogic_sha512',
+           omniauth_providers: [:facebook, :google_oauth2] + (Rails.env.development? ? [:developer] : [])
 
     has_many :orders
 
@@ -24,6 +26,14 @@ module Spree
 
     def admin?
       has_spree_role?('admin')
+    end
+
+    def self.from_omniauth(auth)
+      raise 'An email is required to use an external provider.' if auth.try(:info).try(:email).blank?
+
+      where(email: auth.info.email).first_or_create do |user|
+        user.email = auth.info.email
+      end
     end
 
     protected

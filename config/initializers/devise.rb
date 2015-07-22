@@ -134,4 +134,11 @@ Devise.setup do |config|
   config.sign_out_via = :get
 
   config.case_insensitive_keys = [:email]
+
+  require 'omniauth-facebook'
+  require 'omniauth-google-oauth2'
+
+  config.omniauth :developer unless Rails.env.production?
+  config.omniauth :facebook, ENV['FACEBOOK_KEY'], ENV['FACEBOOK_SECRET'], scope: 'public_profile,email', info_fields: 'first_name,last_name,email'
+  config.omniauth :google_oauth2, ENV['GOOGLE_KEY'], ENV['GOOGLE_SECRET'], scope: 'profile,email', access_type: 'online'
 end
